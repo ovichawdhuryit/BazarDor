@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div>
+    <div className="bg-[#E1E8E1]">
       <Hero/>
     </div>
   );
