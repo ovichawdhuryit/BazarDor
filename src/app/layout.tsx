@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Anek_Bangla } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/Components/NavBar";
 import Marquee from "@/Components/Marquee";
+import Footer from "@/Components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,7 +36,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col">
         <NavBar/>
         <Marquee/>
-        {children}</body>
+        {children}
+        <Footer/>
+        </body>
     </html>
   );
 }
