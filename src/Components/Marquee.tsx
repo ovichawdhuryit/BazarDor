@@ -31,7 +31,7 @@ const Marquee = async () => {
 
 
     return (
-        <div className="flex bg-[#F0F5F0]">
+        <div className=" m-2 flex bg-[#F0F5F0]">
             <MarqueeText direction="right" duration={15}>
                 {data.map((post) => {
                    
