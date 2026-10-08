@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import Marquee from "../Components/Marquee";
 
@@ -13,15 +14,18 @@ const NavBar = async () => {
         dateStyle: "full",
     });
 
-    const response = await fetch("https://api.abcz.workers.dev/api/bazardor/categories")
-    const data: post[] = await response.json()
-
+    const response = await fetch(
+        "https://api.abcz.workers.dev/api/bazardor/categories",
+        { next: { revalidate: 3600 } }
+    );
+    const data: post[] = await response.json();
 
     return (
         <div>
             <div className="bg-[#E1E8E1]">
                 <div className="flex items-center justify-between mx-15">
-                    <div className="flex items-center gap-3">
+                    {/* Logo ক্লিক করলে homepage এ যাবে */}
+                    <Link href="/" className="flex items-center gap-3">
                         <Image
                             className="bg-[#05893E] rounded-xl m-2"
                             src="/logo-icon.png"
@@ -35,11 +39,9 @@ const NavBar = async () => {
                                 বাজার দর
                             </h2>
 
-                            <p className="font-bangla text-sm">
-                                {date}
-                            </p>
+                            <p className="font-bangla text-sm">{date}</p>
                         </div>
-                    </div>
+                    </Link>
 
                     <div className="dropdown dropdown-end">
                         <div
@@ -80,19 +82,33 @@ const NavBar = async () => {
                     </div>
                 </div>
             </div>
-            
-                <div className="mx-16 " >
-                    <ul className="flex gap-6">
-                        {data.map((post) => (
-                            <li key={post.id}>
-                                <span> {post.icon}</span>
-                                <span> {post.nameBn}</span>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            
-            
+
+
+            <div className="mx-16">
+                <ul className="flex gap-6 py-3 overflow-x-auto">
+                    <li>
+                        <Link
+                            href="/"
+                            className="flex items-center gap-1 whitespace-nowrap hover:text-green-600"
+                        >
+                      
+                        
+                        </Link>
+                    </li>
+
+                    {data.map((post) => (
+                        <li key={post.id}>
+                            <Link
+                                href={`/category/${post.id}`}
+                                className="flex items-center gap-1 whitespace-nowrap hover:text-green-600"
+                            >
+                                <span>{post.icon}</span>
+                                <span>{post.nameBn}</span>
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     );
 };
