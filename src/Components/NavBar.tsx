@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import Marquee from "../Components/Marquee";
+import CategoryLinks from "./CategoryLinks";
 
 interface post {
     id: string;
@@ -24,7 +24,6 @@ const NavBar = async () => {
         <div>
             <div className="bg-[#E1E8E1]">
                 <div className="flex items-center justify-between mx-15">
-                    {/* Logo ক্লিক করলে homepage এ যাবে */}
                     <Link href="/" className="flex items-center gap-3">
                         <Image
                             className="bg-[#05893E] rounded-xl m-2"
@@ -39,7 +38,9 @@ const NavBar = async () => {
                                 বাজার দর
                             </h2>
 
-                            <p className="font-bangla text-sm">{date}</p>
+                            <p className="font-bangla text-sm">
+                                {date}
+                                </p>
                         </div>
                     </Link>
 
@@ -83,31 +84,9 @@ const NavBar = async () => {
                 </div>
             </div>
 
-
+            {/* Category list (active highlight CategoryLinks এর ভেতরে) */}
             <div className="mx-16">
-                <ul className="flex gap-6 py-3 overflow-x-auto">
-                    <li>
-                        <Link
-                            href="/"
-                            className="flex items-center gap-1 whitespace-nowrap hover:text-green-600"
-                        >
-                      
-                        
-                        </Link>
-                    </li>
-
-                    {data.map((post) => (
-                        <li key={post.id}>
-                            <Link
-                                href={`/category/${post.id}`}
-                                className="flex items-center gap-1 whitespace-nowrap hover:text-green-600"
-                            >
-                                <span>{post.icon}</span>
-                                <span>{post.nameBn}</span>
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
+                <CategoryLinks categories={data} />
             </div>
         </div>
     );
