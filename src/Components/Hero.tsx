@@ -8,7 +8,8 @@ const Hero = () => {
 
     return (
      
-            <div className='rounded-4xl p-7 m-15 bg-white flex flex-col md:flex-row items-center justify-between gap-8'>
+            <div className='rounded-4xl p-7 m-15 bg-white flex flex-col md:flex-row 
+            items-center justify-between gap-8 '>
 
                 <div className="flex-1">
                     <div className="inline-block bg-[#E2F2E8] text-[#2E7D32] px-4 py-1.5 rounded-full text-sm font-semibold">

@@ -30,15 +30,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       data-theme="light"
-
       className={`${geistSans.variable} ${anekBangla.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col ">
-        <NavBar/>
-        <Marquee/>
-        {children}
-        <Footer/>
-        </body>
+      <body className="min-h-full flex flex-col bg-[#E1E8E1]">
+        <NavBar />
+        <Marquee />
+        <main className="flex-1">
+          {children}
+        </main>
+        <Footer />
+      </body>
     </html>
   );
 }
