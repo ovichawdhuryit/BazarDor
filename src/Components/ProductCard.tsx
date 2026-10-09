@@ -1,4 +1,6 @@
+import Link from 'next/link';
 import React from 'react';
+import { unitBn } from "@/lib/format";
 
 export type Product = {
     id: number;
@@ -10,12 +12,12 @@ export type Product = {
     change: { dir: 'up' | 'down' | 'flat'; pct: number };
 };
 
-const unitBn: Record<string, string> = {
-    kg: 'প্রতি কেজি',
-    litre: 'প্রতি লিটার',
-    dozen: 'প্রতি ডজন',
-    piece: 'প্রতি পিস',
-};
+// export const unitBn: Record<string, string> = {
+//     kg: 'প্রতি কেজি',
+//     litre: 'প্রতি লিটার',
+//     dozen: 'প্রতি ডজন',
+//     piece: 'প্রতি পিস',
+// };
 
 const formatPrice = (n: number) => n.toLocaleString('bn-BD');
 
@@ -34,9 +36,13 @@ const badgeStyle = {
 const arrow = { up: '▲', down: '▼', flat: '—' };
 
 const ProductCard = ({ product }: { product: Product }) => {
-    const { nameBn, unit, image, today, change } = product;
+    const { nameBn, unit, image, today, change, id } = product;
 
     return (
+        <Link href={`/product/${id}`}
+            className="block bg-white rounded-2xl border border-gray-200 p-4 
+            hover:shadow-md hover:border-green-300 transition"
+        >
         <div className="bg-white rounded-2xl border border-gray-200 p-4">
             <div className="flex items-center gap-3">
                 <div className="w-11 h-11 rounded-xl bg-[#EAF3EC] flex items-center justify-center text-2xl">
@@ -60,6 +66,7 @@ const ProductCard = ({ product }: { product: Product }) => {
                 </span>
             </div>
         </div>
+        </Link>
     );
 };
 
