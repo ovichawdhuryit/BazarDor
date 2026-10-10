@@ -5,11 +5,14 @@
 **আজকের বাজারের দাম এক নজরে**
 *Daily essential commodity prices across Bangladesh, in one place.*
 
+### 🌐 [Live Demo: ajker-bazar.netlify.app](https://ajker-bazar.netlify.app/)
+
 ![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB_Atlas-47A248?logo=mongodb&logoColor=white)
 ![Better Auth](https://img.shields.io/badge/Better_Auth-secure-05893E)
+![Netlify](https://img.shields.io/badge/Deployed_on-Netlify-00C7B7?logo=netlify&logoColor=white)
 
 </div>
 
@@ -18,6 +21,8 @@
 ## 📖 About
 
 **BazarDor (বাজার দর)** is a Bangla-first web app that helps people track the daily prices of everyday essentials: rice, lentils, oil, vegetables, fish, meat, eggs, dairy and spices. It shows market-wise minimum, maximum and average prices from different divisions of Bangladesh, along with how prices have changed compared to yesterday.
+
+🔗 **Live site:** [https://ajker-bazar.netlify.app/](https://ajker-bazar.netlify.app/)
 
 ---
 
@@ -32,13 +37,14 @@
 | **Database** | MongoDB Atlas |
 | **Data source** | REST API hosted on Cloudflare Workers (products and categories) |
 | **Fonts** | Anek Bangla, Geist (via `next/font`) |
+| **Hosting** | [Netlify](https://www.netlify.com/) |
 
 ---
 
 ## ✨ Key Features
 
 1. **📊 Daily Price Dashboard**
-   The homepage highlights today's biggest price **increases** and **decreases** with color-coded badges (▲ red, ▼ green, — neutral), plus a scrolling live price ticker and a full list of all products.
+   The homepage highlights today's biggest price **increases** and **decreases** with color-coded badges (▲ red, ▼ green, — neutral), plus a scrolling live price ticker and a full product list with a price **sort dropdown** (low to high, high to low).
 
 2. **🗂️ Category-wise Browsing**
    Browse products by category (চাল, ডাল, তেল, সবজি, মাছ, মাংস, ডিম-দুধ, মসলা) using dynamic routes (`/category/[categoryId]`). The active category is highlighted in the navbar.
@@ -46,8 +52,8 @@
 3. **🏪 Market-wise Price Details**
    Every product has its own page with a price summary (lowest, highest, average) and a table of prices across markets and divisions, including the min, max and average for each market.
 
-4. **🔐 Secure Authentication**
-   Sign up and log in with email and password, **Google** or **GitHub**. Sessions are stored in MongoDB Atlas, protected pages redirect visitors to the login page, and users who try to sign up again with an existing email are sent to log in.
+4. **🔐 Secure Authentication & Profile**
+   Sign up and log in with email and password, **Google** or **GitHub**. Sessions are stored in MongoDB Atlas, protected pages redirect visitors to the login page, and users who try to sign up again with an existing email are sent to log in. Logged-in users can view **My Profile** and update their name.
 
 5. **🇧🇩 Bangla-first & Responsive UI**
    Dates, prices and percentages are formatted in Bangla numerals (`bn-BD`). The layout adapts from mobile to desktop, with a sticky-bottom footer and scrollable tables and category bars on small screens.
@@ -59,8 +65,8 @@
 ### 1. Clone and install
 
 ```bash
-git clone https://github.com/<your-username>/<your-repo>.git
-cd <your-repo>
+git clone https://github.com/ovichawdhuryit/BazarDor.git
+cd BazarDor
 npm install
 ```
 
@@ -100,6 +106,19 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ---
 
+## ☁️ Deployment
+
+The app is deployed on **Netlify** at [ajker-bazar.netlify.app](https://ajker-bazar.netlify.app/).
+
+- **Build command:** `npm run build`
+- Add the same environment variables in **Site configuration → Environment variables**, and set `BETTER_AUTH_URL` to `https://ajker-bazar.netlify.app`.
+- Register the production callback URLs with the OAuth providers:
+  - Google: `https://ajker-bazar.netlify.app/api/auth/callback/google`
+  - GitHub: `https://ajker-bazar.netlify.app/api/auth/callback/github`
+- Allow Netlify to reach MongoDB Atlas under **Network Access**.
+
+---
+
 ## 📁 Project Structure
 
 ```
@@ -108,15 +127,16 @@ src/
 │   ├── api/auth/[...all]/route.ts   # Better Auth handler
 │   ├── category/[categoryId]/       # Category-wise products
 │   ├── product/[id]/                # Product detail page
+│   ├── profile/  profile/update/    # My Profile and update name
 │   ├── login/  signup/              # Auth pages
 │   ├── layout.tsx
 │   └── page.tsx                     # Homepage
-├── Components/                      # NavBar, Hero, ProductCard, Footer, ...
+├── Components/                      # NavBar, Hero, ProductCard, AllProducts, Footer, ...
 ├── lib/
 │   ├── auth.ts                      # Better Auth server config
 │   ├── auth-client.ts               # Better Auth client
 │   └── format.ts                    # Shared helpers (unit labels)
-└── middleware.ts                    # Route protection (proxy.ts on Next.js 16)
+└── proxy.ts                         # Route protection (middleware.ts on older Next.js)
 ```
 
 ---
