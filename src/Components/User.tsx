@@ -60,6 +60,9 @@ const User = () => {
                     <span className="block text-xs font-normal">{email}</span>
                 </li>
                 <li>
+                    <Link href="/profile">My Profile</Link>
+                </li>
+                <li>
                     <button onClick={handleLogout}>Logout</button>
                 </li>
             </ul>

@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
+import ViewAllButton from './ViewAllButton';
 
 const Hero = () => {
     const date = new Date().toLocaleDateString("bn-BD", {
@@ -23,9 +24,7 @@ const Hero = () => {
                         সর্বাধিক এবং দামের পরিবর্তন এক জায়গায়।
                     </p>
 
-                    <button className='btn bg-green-500 text-white font-medium text-xl mt-3'>
-                        সব পণ্য দেখুন
-                    </button>
+                  <ViewAllButton/>
                 </div>
 
 

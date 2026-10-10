@@ -1,10 +1,11 @@
 import React from 'react';
 import ProductCard, { Product } from './ProductCard';
+import AllProducts from './AllProducts';
 
 const PriceWise = async () => {
     const response = await fetch(
         'https://api.abcz.workers.dev/api/bazardor/products',
-        { next: { revalidate: 3600 } } 
+        { next: { revalidate: 3600 } }
     );
     const data: Product[] = await response.json();
 
@@ -22,7 +23,6 @@ const PriceWise = async () => {
 
     return (
         <div className="px-20 py-6 space-y-10">
-    
             <section>
                 <h2 className="text-xl font-bold mb-4">
                     <span className="text-red-500 text-sm">▲</span> আজ দাম বেড়েছে
@@ -34,7 +34,6 @@ const PriceWise = async () => {
                 </div>
             </section>
 
- 
             <section>
                 <h2 className="text-xl font-bold mb-4">
                     <span className="text-green-600 text-sm">▼</span> আজ দাম কমেছে
@@ -46,18 +45,7 @@ const PriceWise = async () => {
                 </div>
             </section>
 
-
-            <section>
-                <h2 className="text-xl font-bold">সব পণ্য</h2>
-                <p className="text-sm text-gray-500 mb-4">
-                    মোট {data.length.toLocaleString('bn-BD')}টি পণ্য দেখানো হচ্ছে
-                </p>
-                <div className={grid}>
-                    {data.map((p) => (
-                        <ProductCard key={p.id} product={p} />
-                    ))}
-                </div>
-            </section>
+            <AllProducts products={data} />
         </div>
     );
 };
